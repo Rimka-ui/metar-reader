@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>METAR Reader</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="container">
+    <h1>METAR Reader</h1>
+    <p class="subtitle">Type an airport code to get a plain-English weather report.</p>
+
+    <form id="metar-form" autocomplete="off">
+      <input
+        type="text"
+        id="station-input"
+        placeholder="e.g. KHIO, KJFK, KLAX"
+        maxlength="4"
+      >
+      <button type="submit">Get Weather</button>
+    </form>
+
+    <div id="result" class="result hidden"></div>
+  </main>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
