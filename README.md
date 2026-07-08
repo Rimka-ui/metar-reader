@@ -89,6 +89,37 @@ temperature, and pressure.
 5. Open that URL in a browser, type in an airport code (e.g. `KHIO`,
    `KJFK`, `KLAX`), and submit.
 
+## Testing
+
+Unit tests live in [tests/test_app.py](tests/test_app.py) and cover the
+Flask routes end to end — request validation, error handling, and METAR
+decoding. The upstream Aviation Weather API call is mocked with a set of
+hand-picked raw METAR strings (calm wind, gusts, thunderstorms, unrestricted
+visibility, sub-zero temperatures, etc.), so the tests run offline and
+verify that each report is *interpreted* correctly rather than just that
+the route returns 200.
+
+1. **Install dev dependencies** (adds `pytest` on top of the app's
+   requirements)
+
+   ```bash
+   pip install -r requirements-dev.txt
+   ```
+
+2. **Run the tests**
+
+   ```bash
+   pytest tests/ -v
+   ```
+
+3. **(Optional) Check coverage**
+
+   ```bash
+   pip install coverage
+   coverage run -m pytest tests/
+   coverage report -m --include="app.py,metar_decoder.py"
+   ```
+
 ## Deploying
 
 `app.run(debug=True)` is for local development only — it exposes an
@@ -108,6 +139,10 @@ waitress-serve --listen=0.0.0.0:8000 app:app
 Weather data is fetched live from the
 [NOAA Aviation Weather Center Data API](https://aviationweather.gov/data/api/).
 This project is not affiliated with NOAA or the FAA.
+
+## Contributors
+
+- [Rimka-ui](https://github.com/Rimka-ui)
 
 ## License
 
